@@ -3,12 +3,8 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <assert.h>
 
-enum cpu_status
-{
+enum cpu_status {
     CPU_OK,
     CPU_HALTED,
     CPU_ILLEGAL_INSTRUCTION,
@@ -24,16 +20,33 @@ enum cpu_register {
     REGISTER_B,
     REGISTER_C,
     REGISTER_D,
-#ifdef BONUS_JMP
-    REGISTER_RESULT,
-#endif // BONUS_JMP
 };
 
-struct cpu; // Hold your tongue!
+struct cpu {
+    int32_t arithmetic_regs[4];
+    enum cpu_status status;
+    int32_t instruction_index;
+    size_t stack_size;
 
-int32_t* cpu_create_memory(FILE *program, size_t stack_capacity, int32_t **stack_bottom);
+    int32_t* mem_start_address;
+    int32_t* stack_top;
+    int32_t* stack_bottom;
+    int8_t has_stack;
 
-struct cpu *cpu_create(int32_t *memory, int32_t *stack_bottom, size_t stack_capacity);
+    // stack roof is the lowest valid stack adress (closest to instructions)
+    int32_t* stack_roof;
+
+    // this is here for in instruction, if there is negative number
+    // after another number without whitespace, i need to save it for next in
+    int8_t is_neg;
+    
+};
+
+int32_t* cpu_create_memory(FILE *program, size_t stack_capacity,
+                           int32_t **stack_bottom);
+
+struct cpu *cpu_create(int32_t *memory, int32_t *stack_bottom,
+                       size_t stack_capacity);
 
 int32_t cpu_get_register(struct cpu *cpu, enum cpu_register reg);
 
@@ -51,4 +64,4 @@ int cpu_step(struct cpu *cpu);
 
 long long cpu_run(struct cpu *cpu, size_t steps);
 
-#endif // CPU_H
+#endif  // CPU_H
