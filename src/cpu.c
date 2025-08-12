@@ -6,29 +6,6 @@
 
 const size_t BLOCK_4KB = 4096;
 
-int check_reg(struct cpu *cpu, enum cpu_register reg)
-{
-    if (reg < REGISTER_A || reg > REGISTER_D)
-    {
-        cpu->status = CPU_ILLEGAL_OPERAND;
-        return 1;
-    }
-    return 0;
-}
-
-static int check_stack(struct cpu *cpu, int32_t* pointer, int32_t number)
-{
-    if (cpu->has_stack == 0 ||
-        cpu->stack_size == 0 ||
-        pointer > cpu->stack_bottom ||
-        cpu->arithmetic_regs[REGISTER_D] + number < 0)
-    {
-        cpu->status = CPU_INVALID_STACK_OPERATION;
-        return 1;
-    }
-    return 0;
-}
-
 static int32_t* memory_increase(int32_t *memory, size_t size, size_t increase)
 {
     int32_t* temp_p = realloc(memory, size + increase);
