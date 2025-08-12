@@ -353,3 +353,10 @@ int pop(struct cpu *cpu)
     cpu->instruction_index += 2;
     return 1;
 }
+
+int (*instructions[19]) (struct cpu *) = {
+    &nop, &halt, &add, &sub, &mul,
+    &div0, &inc, &dec, &loop, &movr,
+    &load, &store, &in, &get, &out,
+    &put, &swap, &push, &pop
+};
