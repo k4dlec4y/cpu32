@@ -99,14 +99,13 @@ struct cpu *cpu_create(int32_t *memory, int32_t *stack_bottom, size_t stack_capa
     cpu->arithmetic_regs[REGISTER_C] = 0;
     cpu->arithmetic_regs[REGISTER_D] = 0;
     cpu->instruction_index = 0;
-    cpu->mem_start_address = memory;
+    cpu->memory = memory;
 
     cpu->stack_size = 0;
     cpu->stack_top = stack_bottom;
     cpu->stack_bottom = stack_bottom;
     cpu->stack_roof = stack_bottom - stack_capacity + 1;
     cpu->status = CPU_OK;
-    cpu->is_neg = 0;
     cpu->has_stack = (stack_capacity > 0) ? 1 : 0;
     return cpu;
 }
@@ -154,14 +153,13 @@ void cpu_destroy(struct cpu *cpu)
     assert(cpu != NULL);
     cpu_reset_aux(cpu);
 
-    free(cpu->mem_start_address);
-    cpu->mem_start_address = NULL;
+    free(cpu->memory);
+    cpu->memory = NULL;
 
     cpu->stack_top = NULL;
     cpu->stack_bottom = NULL;
     cpu->stack_roof = NULL;
     cpu->status = 0;
-    cpu->is_neg = 0;
     cpu->has_stack = 0;
 }
 
@@ -183,7 +181,7 @@ int cpu_step(struct cpu *cpu)
         return 0;
     }
 
-    int32_t* memory_pointer = cpu->mem_start_address + cpu->instruction_index;
+    int32_t* memory_pointer = cpu->memory + cpu->instruction_index;
     if (memory_pointer >= cpu->stack_roof || cpu->instruction_index < 0)
     {
         cpu->status = CPU_INVALID_ADDRESS;

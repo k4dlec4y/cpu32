@@ -45,7 +45,7 @@ int add(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
@@ -59,7 +59,7 @@ int sub(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
@@ -73,7 +73,7 @@ int mul(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
@@ -87,7 +87,7 @@ int div0(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
@@ -105,7 +105,7 @@ int inc(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
@@ -119,7 +119,7 @@ int dec(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
@@ -133,7 +133,7 @@ int loop(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t index = *(instruction_address + 1);
 
     if (cpu->arithmetic_regs[REGISTER_C]) {
@@ -148,7 +148,7 @@ int movr(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t number = *(instruction_address + 2);
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
@@ -163,7 +163,7 @@ int load(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t number = *(instruction_address + 2);
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
@@ -183,7 +183,7 @@ int store(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t number = *(instruction_address + 2);
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
@@ -203,7 +203,7 @@ int in(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
@@ -230,7 +230,7 @@ int get(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
@@ -251,7 +251,7 @@ int out(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
@@ -265,7 +265,7 @@ int put(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
@@ -284,7 +284,7 @@ int swap(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg1 = *(instruction_address + 1);
     int32_t reg2 = *(instruction_address + 2);
     if (!check_reg(cpu, reg1) || !check_reg(cpu, reg2))
@@ -301,7 +301,7 @@ int push(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
@@ -326,7 +326,7 @@ int pop(struct cpu *cpu)
 {
     assert(cpu != NULL);
 
-    int32_t *instruction_address = cpu->mem_start_address + cpu->instruction_index;
+    int32_t *instruction_address = cpu->memory + cpu->instruction_index;
     int32_t reg = *(instruction_address + 1);
     if (!check_reg(cpu, reg))
         return 0;
