@@ -1,0 +1,26 @@
+movr A 1
+movr B 2
+movr C 3
+movr D 0
+
+push B
+push C
+push A
+
+load A 2
+out A
+
+pop A
+out A
+
+movr A 7
+store A 1
+
+pop A
+out A
+
+pop A
+out A
+
+pop A
+halt

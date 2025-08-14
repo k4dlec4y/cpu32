@@ -1,0 +1,29 @@
+nop
+movr B 7
+movr C 4
+movr D 2
+inc B
+add B
+
+dec C
+out A
+
+div D
+loop 14
+movr A 10
+put A
+
+movr A 97
+put A
+movr A 104
+put A
+movr A 111
+put A
+movr A 106
+put A
+movr B 33
+swap A B
+put A
+movr A 10
+put A
+halt
