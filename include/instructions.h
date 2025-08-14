@@ -6,7 +6,8 @@
  * @brief This file contains all available (valid) instructions.
  *
  * In a program, they are represented by 32-bit little-endian numbers. This also
- * applies to operands like REG, INDEX and NUM.
+ * applies to operands like REG, INDEX and NUM. REG A/B/C/D is represented
+ * by 0/1/2/3.
  * 
  * All instructions return 1 on success (halt cannot succeed),
  * and 0 if they were not executed properly.
