@@ -43,7 +43,7 @@ struct cpu {
  * The memory is allocated in 4 KiB blocks. Instructions are stored at the start
  * of the memory, and the stack is placed after them. The stack grows downward
  * when pushing (stack bottom is the highest address). The address space
- * between the end of instructions and start (top) of the stack is is filled
+ * between the end of instructions and start (top) of the stack is filled
  * with zeros.
  * 
  * @param program        file handler containing the program to be executed

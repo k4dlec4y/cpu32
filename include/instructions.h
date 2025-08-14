@@ -117,7 +117,7 @@ int store(struct cpu *cpu);
  *
  * Reads from the input a 32-bit number and stores it into REG.
  *
- * If the value from the input doesn't represent a valid number,
+ * If the value doesn't represent a valid number,
  * instruction won't execute and cpu status is set to CPU_IO_ERROR.
  *
  * If there are no more numbers on the input (EOF), register C is set to 0 and
@@ -163,10 +163,10 @@ int swap(struct cpu *cpu);
 /**
  * @brief Instruction 17 - push REG
  *
- * Pushes the value of REG on the stack (if the stack is not full).
- *
- * Otherwise, instruction won't be executed and cpu status
- * is set to CPU_INVALID_STACK_OPERATION.
+ * Pushes the value of REG on the stack.
+ * 
+ * If the stack is full or program was run with stack size 0, instruction won't
+ * be executed and cpu status is set to CPU_INVALID_STACK_OPERATION.
  */
 int push(struct cpu *cpu);
 
