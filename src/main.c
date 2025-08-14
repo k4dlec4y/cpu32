@@ -108,7 +108,7 @@ int main(int argc, const char *argv[])
 {
     errno = 0;
     int file_index = 2;
-    size_t stack_capacity = 4096;
+    size_t stack_capacity = 1024;
 
     switch (argc)
     {

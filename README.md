@@ -112,7 +112,8 @@ make
 where  
 - `run` will run the emulator in normal mode and `trace` will print informations
 about cpu after every instruction  
-- `stack_capacity` is an optional parameter (default is 4096)  
+- `stack_capacity` is an optional parameter (default is 1024), specifies
+number of `int32_t` cells, can also be set to 0
 - `FILE` is a path to the file containing the program (binary with instructions)
 
 ## Tests
