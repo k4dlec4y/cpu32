@@ -151,11 +151,11 @@ int main(int argc, const char *argv[])
         insufficient_memory();
         return -1;
     }
+    fclose(file);
 
     struct cpu *cpu = cpu_create(memory, stack_bottom, stack_capacity);
     if (!cpu) {
         free(memory); memory = NULL;
-        fclose(file);
         insufficient_memory();
         return -1;
     }
