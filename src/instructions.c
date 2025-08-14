@@ -1,4 +1,5 @@
 #include "../include/instructions.h"
+#include <assert.h>
 #include <stdio.h>
 #include <inttypes.h>
 #include <limits.h>
