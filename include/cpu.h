@@ -47,7 +47,7 @@ struct cpu {
  * with zeros.
  * 
  * @param program        file handler containing the program to be executed
- * @param stack_capacity desired stack size, can also be 0
+ * @param stack_capacity desired stack size, count of int32_t cells, not bytes
  * @param stack_bottom   out parameter, where stack bottom is stored
  * 
  * @return pointer to the memory, NULL in case of error
@@ -79,8 +79,7 @@ enum cpu_status cpu_get_status(struct cpu *cpu);
 int32_t cpu_get_stack_size(struct cpu *cpu);
 
 /**
- * @brief Sets registers/pointers to 0/NULL and releases resources (memory and
- * struct cpu)
+ * @brief Sets registers/pointers to 0/NULL and releases resources (memory)
  * 
  * @param cpu pointer to the cpu
  */
@@ -106,8 +105,8 @@ int cpu_step(struct cpu *cpu);
 /**
  * @brief Executes `steps` instructions.
  * 
- * @return if the cpu reaches an error status, after executing K steps, returns
- * -K; otherwise it returns the real count of executed instructions
+ * @return if the cpu reaches an error status while executing K-th step,
+ * returns -K; otherwise it returns the real count of executed instructions
  * 
  * @note the real count can be lower than steps, if the cpu executes halt
  */
